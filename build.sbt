@@ -9,7 +9,6 @@ crossPaths := false // drop off Scala suffix from artifact names.
 organization := "org.scash"
 
 scmInfo := Some(ScmInfo(url("https://github.com/sken77/BLAKE3jni"), "git@github.com:sken77/BLAKE3jni.git"))
-licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
 
 bintrayPackageLabels := Seq("cryptography", "BLAKE3", "p2p", "blockchain")
 bintrayOrganization := Some("scala-cash")

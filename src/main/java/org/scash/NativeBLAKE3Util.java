@@ -9,6 +9,12 @@ public class NativeBLAKE3Util {
             System.out.println("PASS: " + message);
     }
 
+    public static void checkState(boolean expression) {
+        if (!expression) {
+            throw new IllegalStateException();
+        }
+    }
+
     public static class AssertFailException extends Exception {
         public AssertFailException(String message) {
             super(message);
