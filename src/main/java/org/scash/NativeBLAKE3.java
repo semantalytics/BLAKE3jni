@@ -1,4 +1,5 @@
 package org.scash;
+
 import org.scijava.nativelib.NativeLoader;
 
 public class NativeBLAKE3 {
