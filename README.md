@@ -5,7 +5,8 @@ C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) crypt
 
 Generating the JNI header
 ```
-javac *NativeBlake3.java -h src/main/resources/include/
+cd src/main/java/org/scash/
+javac NativeBlake3.java -h ../../../c/
 ```
 
 The library is cross compiled from linux
