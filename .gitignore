@@ -1,6 +1,5 @@
 .idea
 *.iml
 *.o
-*.so
 *.class
-/target/
+target/
