@@ -1,4 +1,4 @@
-#JNI Bindings for Blake3
+# JNI Bindings for Blake3
 WIP
 
 C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) cryptographic hash function
@@ -12,7 +12,7 @@ The library is cross compiled from linux
 
 for more platforms go here [here](https://github.com/BLAKE3-team/BLAKE3/tree/master/c)
 
-####Linux
+#### Linux
 
 ```
 cd src/main/c
@@ -22,7 +22,7 @@ blake3_sse41_x86-64_unix.S blake3_avx2_x86-64_unix.S \
 blake3_avx512_x86-64_unix.S org_scash_NativeBLAKE3.c
 ```
 
-####Windows 64
+#### Windows 64
 
 ```
 cd src/main/c
