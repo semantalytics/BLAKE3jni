@@ -15,6 +15,12 @@ public class NativeBLAKE3Util {
         }
     }
 
+    public static void checkArgument(boolean expression) {
+        if (!expression) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public static class AssertFailException extends Exception {
         public AssertFailException(String message) {
             super(message);

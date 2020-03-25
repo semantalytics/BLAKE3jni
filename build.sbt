@@ -2,10 +2,6 @@ name := "BLAKE3jni"
 
 version := "0.0.1"
 
-autoScalaLibrary := false // exclude scala-library from dependencies
-
-crossPaths := false // drop off Scala suffix from artifact names.
-
 organization := "org.scash"
 
 scmInfo := Some(ScmInfo(url("https://github.com/sken77/BLAKE3jni"), "git@github.com:sken77/BLAKE3jni.git"))
@@ -20,3 +16,9 @@ libraryDependencies ++= List(
 )
 
 Compile / unmanagedResourceDirectories += baseDirectory.value / "natives"
+
+//ignore everything related to scala
+Compile / unmanagedSourceDirectories := (Compile / javaSource).value :: Nil
+Test / unmanagedSourceDirectories := (Test / javaSource).value :: Nil
+autoScalaLibrary := false // exclude scala-library from dependencies
+crossPaths := false // drop off Scala suffix from artifact names.
