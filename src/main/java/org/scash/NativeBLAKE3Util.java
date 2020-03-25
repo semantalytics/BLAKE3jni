@@ -21,6 +21,16 @@ public class NativeBLAKE3Util {
         }
     }
 
+    public static void checkOutput(boolean expression, String message) throws InvalidNativeOutput {
+        if (!expression) {
+            throw new InvalidNativeOutput(message);
+        }
+    }
+
+    public static class InvalidNativeOutput extends Exception {
+        public InvalidNativeOutput(String message) { super(message); }
+    }
+
     public static class AssertFailException extends Exception {
         public AssertFailException(String message) {
             super(message);
