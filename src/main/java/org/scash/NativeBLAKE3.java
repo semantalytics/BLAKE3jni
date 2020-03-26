@@ -44,7 +44,15 @@ public class NativeBLAKE3 {
 
     public NativeBLAKE3() throws IllegalStateException {
         checkState(enabled);
-        long initHasher = JNI.create_hasher();
+        long initHasher;
+
+        w.lock();
+        try {
+            initHasher = JNI.create_hasher();
+        } finally {
+            w.unlock();
+        }
+
         checkState(initHasher != 0);
         hasher = initHasher;
     }
@@ -68,7 +76,35 @@ public class NativeBLAKE3 {
         }
     }
 
-    public void update(byte[] data) {
+    public void initKeyed(byte[] key) {
+        checkArgument(key.length == KEY_LEN);
+        ByteBuffer byteBuff = nativeByteBuffer.get();
+        if (byteBuff == null || byteBuff.capacity() < key.length) {
+            byteBuff = ByteBuffer.allocateDirect(key.length);
+            byteBuff.order(ByteOrder.nativeOrder());
+            nativeByteBuffer.set(byteBuff);
+        }
+        byteBuff.rewind();
+        byteBuff.put(key);
+
+        w.lock();
+        try {
+            JNI.blake3_hasher_init_keyed(getHasher(), byteBuff);
+        } finally {
+            w.unlock();
+        }
+    }
+
+    public void initDeriveKey(String context) {
+        w.lock();
+        try {
+            JNI.blake3_hasher_init_derive_key(getHasher(), context);
+        } finally {
+            w.unlock();
+        }
+    }
+
+    public void update(byte[] data) throws InvalidNativeOutput {
         ByteBuffer byteBuff = nativeByteBuffer.get();
 
         if (byteBuff == null || byteBuff.capacity() < data.length) {
@@ -86,19 +122,34 @@ public class NativeBLAKE3 {
         }
     }
 
-    public byte[] getOutput() throws Exception {
+    public byte[] getOutput() throws InvalidNativeOutput {
         return getOutput(OUT_LEN);
     }
 
-    public byte[] getOutput(int outputLength) throws Exception {
-        byte[] retByteArray;
+    public byte[] getOutput(int outputLength) throws InvalidNativeOutput {
+        ByteBuffer byteBuff = nativeByteBuffer.get();
+
+        if (byteBuff == null || byteBuff.capacity() < outputLength) {
+            byteBuff = ByteBuffer.allocateDirect(outputLength);
+            byteBuff.order(ByteOrder.nativeOrder());
+            nativeByteBuffer.set(byteBuff);
+        }
+        byteBuff.rewind();
+
         r.lock();
         try {
-            retByteArray = JNI.blake3_hasher_finalize(getHasher(), outputLength);
+            JNI.blake3_hasher_finalize(getHasher(), byteBuff, outputLength);
         } finally {
             r.unlock();
         }
+
+        byte[] retByteArray = new byte[outputLength];
+        byteBuff.get(retByteArray);
+
+        nativeByteBuffer.set(byteBuff.clear());
+
         checkOutput(retByteArray.length == outputLength, "Output size produced by lib doesnt match:" + retByteArray.length + " expected:" + outputLength);
+
         return retByteArray;
     }
 

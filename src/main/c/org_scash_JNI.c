@@ -36,6 +36,37 @@ JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init
         return;
   }
 
+JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init_1keyed
+  (JNIEnv *env, jclass classObject, jlong hp, jobject byteBuffer)
+  {
+        blake3_hasher *hasher = (blake3_hasher*)(uintptr_t)hp;
+        uint8_t *key = (uint8_t*) (*env)->GetDirectBufferAddress(env, byteBuffer);
+
+        uint8_t keyarr[BLAKE3_KEY_LEN];
+
+        for (size_t i = 0; i < BLAKE3_KEY_LEN; i++) {
+            keyarr[i] = key[i];
+        }
+
+        blake3_hasher_init_keyed(hasher, keyarr);
+
+        (void)classObject;
+        return;
+  }
+
+JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init_1derive_1key
+  (JNIEnv *env, jclass classObject, jlong hp, jstring ctx)
+  {
+        blake3_hasher *hasher = (blake3_hasher*)(uintptr_t)hp;
+
+        const char *context = (*env)->GetStringUTFChars(env, ctx, 0);
+
+        blake3_hasher_init_derive_key(hasher, context);
+
+        (*env)->ReleaseStringUTFChars(env, ctx, context);
+        (void)classObject;
+  }
+
 JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1update
   (JNIEnv *env, jclass classObject, jlong hp, jobject byteBuffer, jint input_len)
   {
@@ -49,20 +80,16 @@ JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1update
         return;
   }
 
-JNIEXPORT jbyteArray JNICALL Java_org_scash_JNI_blake3_1hasher_1finalize
-  (JNIEnv *env, jclass classObject, jlong hp, jint output_len)
+JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1finalize
+  (JNIEnv *env, jclass classObject, jlong hp, jobject byteBuffer, jint output_len)
   {
         blake3_hasher *hasher = (blake3_hasher*)(uintptr_t)hp;
 
-        jbyteArray retArray;
-        uint8_t output[output_len];
+        uint8_t *output = (uint8_t*) (*env)->GetDirectBufferAddress(env, byteBuffer);
 
         blake3_hasher_finalize(hasher, output, output_len);
 
-        retArray = (*env)->NewByteArray(env, output_len);
-        (*env)->SetByteArrayRegion(env, retArray, 0, output_len, (jbyte*)output);
-
         (void)classObject;
 
-        return retArray;
+        return;
   }

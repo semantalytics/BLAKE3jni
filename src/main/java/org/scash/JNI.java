@@ -9,7 +9,11 @@ class JNI {
 
     static native void blake3_hasher_init(long hasher);
 
-    static native void blake3_hasher_update(long hasher, ByteBuffer byteBuff, long input_len);
+    static native void blake3_hasher_init_keyed(long hasher, ByteBuffer byteBuff);
 
-    static native byte[] blake3_hasher_finalize(long hasher, long out_len);
+    static native void blake3_hasher_init_derive_key(long hasher, String context);
+
+    static native void blake3_hasher_update(long hasher, ByteBuffer byteBuff, int input_len);
+
+    static native void blake3_hasher_finalize(long hasher, ByteBuffer byteBuff, int out_len);
 }

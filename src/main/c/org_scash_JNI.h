@@ -33,6 +33,22 @@ JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init
 
 /*
  * Class:     org_scash_JNI
+ * Method:    blake3_hasher_init_keyed
+ * Signature: (JLjava/nio/ByteBuffer;)V
+ */
+JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init_1keyed
+  (JNIEnv *, jclass, jlong, jobject);
+
+/*
+ * Class:     org_scash_JNI
+ * Method:    blake3_hasher_init_derive_key
+ * Signature: (JLjava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init_1derive_1key
+  (JNIEnv *, jclass, jlong, jstring);
+
+/*
+ * Class:     org_scash_JNI
  * Method:    blake3_hasher_update
  * Signature: (JLjava/nio/ByteBuffer;I)V
  */
@@ -42,10 +58,10 @@ JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1update
 /*
  * Class:     org_scash_JNI
  * Method:    blake3_hasher_finalize
- * Signature: (JI)[B
+ * Signature: (JLjava/nio/ByteBuffer;I)V
  */
-JNIEXPORT jbyteArray JNICALL Java_org_scash_JNI_blake3_1hasher_1finalize
-  (JNIEnv *, jclass, jlong, jint);
+JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1finalize
+  (JNIEnv *, jclass, jlong, jobject, jint);
 
 #ifdef __cplusplus
 }
