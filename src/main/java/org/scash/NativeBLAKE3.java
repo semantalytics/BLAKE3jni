@@ -45,14 +45,7 @@ public class NativeBLAKE3 {
     public NativeBLAKE3() throws IllegalStateException {
         checkState(enabled);
         long initHasher;
-
-        w.lock();
-        try {
-            initHasher = JNI.create_hasher();
-        } finally {
-            w.unlock();
-        }
-
+        initHasher = JNI.create_hasher();
         checkState(initHasher != 0);
         hasher = initHasher;
     }
@@ -68,11 +61,11 @@ public class NativeBLAKE3 {
     }
 
     public void initDefault() {
-        w.lock();
+        r.lock();
         try {
             JNI.blake3_hasher_init(getHasher());
         } finally {
-            w.unlock();
+            r.unlock();
         }
     }
 
@@ -96,15 +89,15 @@ public class NativeBLAKE3 {
     }
 
     public void initDeriveKey(String context) {
-        w.lock();
+        r.lock();
         try {
             JNI.blake3_hasher_init_derive_key(getHasher(), context);
         } finally {
-            w.unlock();
+            r.unlock();
         }
     }
 
-    public void update(byte[] data) throws InvalidNativeOutput {
+    public void update(byte[] data) {
         ByteBuffer byteBuff = nativeByteBuffer.get();
 
         if (byteBuff == null || byteBuff.capacity() < data.length) {
@@ -114,11 +107,11 @@ public class NativeBLAKE3 {
         }
         byteBuff.rewind();
         byteBuff.put(data);
-        r.lock();
+        w.lock();
         try {
             JNI.blake3_hasher_update(getHasher(), byteBuff, data.length);
         } finally {
-            r.unlock();
+            w.unlock();
         }
     }
 
@@ -136,11 +129,11 @@ public class NativeBLAKE3 {
         }
         byteBuff.rewind();
 
-        r.lock();
+        w.lock();
         try {
             JNI.blake3_hasher_finalize(getHasher(), byteBuff, outputLength);
         } finally {
-            r.unlock();
+            w.unlock();
         }
 
         byte[] retByteArray = new byte[outputLength];

@@ -42,13 +42,7 @@ JNIEXPORT void JNICALL Java_org_scash_JNI_blake3_1hasher_1init_1keyed
         blake3_hasher *hasher = (blake3_hasher*)(uintptr_t)hp;
         uint8_t *key = (uint8_t*) (*env)->GetDirectBufferAddress(env, byteBuffer);
 
-        uint8_t keyarr[BLAKE3_KEY_LEN];
-
-        for (size_t i = 0; i < BLAKE3_KEY_LEN; i++) {
-            keyarr[i] = key[i];
-        }
-
-        blake3_hasher_init_keyed(hasher, keyarr);
+        blake3_hasher_init_keyed(hasher, key);
 
         (void)classObject;
         return;
