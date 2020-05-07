@@ -1,7 +1,8 @@
 # JNI Bindings for Blake3
-WIP
 
 C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) cryptographic hash function
+
+This library works out of the box and has been tested for for Ubuntu and Windows 64. If you want to compile your own binaries you can follow the mini guide below
 
 Generating the JNI header
 ```
