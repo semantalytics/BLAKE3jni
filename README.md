@@ -6,7 +6,6 @@ C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) crypt
 
 ```java
 
-  byte[] data = "this is my data".getBytes();
   //Test if the library is properly connected to the c native binaries
   assert(NativeBlake3.isEnabled());
    
@@ -15,6 +14,7 @@ C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) crypt
   hasher.initDefault();
   
   //read data
+  byte[] data = "this is my data".getBytes();
   hasher.update(data);
   //more data
   byte[] moredata = "more data".getBytes();
