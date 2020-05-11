@@ -3,7 +3,6 @@
 C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) cryptographic hash function
 
 ## Example
-The library has the same [c api](https://github.com/BLAKE3-team/BLAKE3/tree/master/c)
 
 ```java
 
@@ -29,6 +28,9 @@ The library has the same [c api](https://github.com/BLAKE3-team/BLAKE3/tree/mast
   
 ```
 ## API
+
+The library has the same [c api](https://github.com/BLAKE3-team/BLAKE3/tree/master/c)
+
 ```java
   //verifies the library is connected
   public static boolean isEnabled() 
@@ -49,8 +51,9 @@ The library has the same [c api](https://github.com/BLAKE3-team/BLAKE3/tree/mast
   public byte[] getOutput(int outputLength) throws InvalidNativeOutput
   
   //resource handling
-  public boolean isValid() //verifies the resource hasnt been closed
   public void close() //close resource and frees up memory in c.
+  public boolean isValid() //returns true if the resource for this instance hasnt been closed
+
 ```
 
 ## Building from scratch
