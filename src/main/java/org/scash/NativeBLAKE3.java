@@ -139,8 +139,6 @@ public class NativeBLAKE3 {
         byte[] retByteArray = new byte[outputLength];
         byteBuff.get(retByteArray);
 
-        nativeByteBuffer.set(byteBuff.clear());
-
         checkOutput(retByteArray.length == outputLength, "Output size produced by lib doesnt match:" + retByteArray.length + " expected:" + outputLength);
 
         return retByteArray;
