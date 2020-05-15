@@ -1,6 +1,12 @@
+[ ![Download](https://api.bintray.com/packages/scala-cash/io/blake3jni/images/download.svg) ](https://bintray.com/scala-cash/io/blake3jni/_latestVersion)
+
 # JNI Bindings for Blake3
 
 C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) cryptographic hash function
+
+## Add to project
+
+Downloading directly from maven repo is pending and this section should be updated soon
 
 ## Example
 
@@ -62,11 +68,11 @@ This library works out of the box and has been tested for for Ubuntu and Windows
 Generating the JNI header
 ```
 cd src/main/java/org/scash/
-javac *.java -h ../../../c/
+javac JNI.java -h ../../../c/
 ```
-This will generate a file called [org_scash_JNI.h](https://github.com/sken77/BLAKE3jni/blob/master/src/main/c/org_scash_JNI.h) based on the`native` calls inside the private `JNI` class.
+This will generate a file called [io_lktk_JNI.h](https://github.com/sken77/BLAKE3jni/blob/master/src/main/c/io_lktk_JNI.h) based on the`native` calls inside the private `JNI` class.
 
-The user then needs to implement the methods from the header in its c file [org_scash_JNI.c](https://github.com/sken77/BLAKE3jni/blob/master/src/main/c/org_scash_JNI3.c)
+The user then needs to implement the methods from the header in its c file [io_lktk_JNI.c](https://github.com/sken77/BLAKE3jni/blob/master/src/main/c/io_lktk_JNI.c)
 
 The library is cross compiled from linux
 
