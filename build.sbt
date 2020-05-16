@@ -1,8 +1,18 @@
 name := "BLAKE3jni"
 
-version := "0.1.0"
+version := "0.2.0"
 
-organization := "org.scash"
+publishMavenStyle := true
+
+developers +=
+  Developer(
+    "sken",
+    "sken",
+    "sken77@pm.me",
+    url("https://www.github.com/sken77")
+  )
+
+organization := "io.lktk"
 
 licenses += ("Apache-2.0", url(
   "https://www.apache.org/licenses/LICENSE-2.0.txt"
@@ -14,10 +24,6 @@ scmInfo := Some(
     "git@github.com:sken77/BLAKE3jni.git"
   )
 )
-
-bintrayPackageLabels := Seq("cryptography", "BLAKE3")
-bintrayOrganization := Some("scala-cash")
-bintrayRepository := "io"
 
 libraryDependencies ++= List(
   "com.novocode" % "junit-interface" % "0.11" % "test",

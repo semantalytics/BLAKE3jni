@@ -1,4 +1,4 @@
-package org.scash;
+package io.lktk;
 
 import java.nio.ByteBuffer;
 
