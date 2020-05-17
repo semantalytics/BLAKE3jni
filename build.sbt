@@ -16,6 +16,8 @@ inThisBuild(
   )
 )
 
+testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
+
 name := "BLAKE3jni"
 
 version := "0.2.0"

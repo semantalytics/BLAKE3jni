@@ -10,6 +10,8 @@ stages:
 
 jobs:
   include:
+    - name: test
+      script: sbt test
     - name: compile
       script: sbt compile
     - stage: release
