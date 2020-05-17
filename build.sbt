@@ -16,11 +16,13 @@ inThisBuild(
   )
 )
 
+publishMavenStyle := true
+
 testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
 
 name := "BLAKE3jni"
 
-version := "0.2.0"
+version := "0.2.1"
 
 libraryDependencies ++= List(
   "com.novocode" % "junit-interface" % "0.11" % "test",
