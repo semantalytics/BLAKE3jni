@@ -1,29 +1,26 @@
+inThisBuild(
+  List(
+    organization := "io.lktk",
+    homepage := Some(url("https://lktk.io")),
+    licenses := List(
+      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+    ),
+    developers := List(
+      Developer(
+        "sken",
+        "sken",
+        "sken77@pm.me",
+        url("https://www.github.com/sken77")
+      )
+    )
+  )
+)
+
+testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
+
 name := "BLAKE3jni"
 
 version := "0.2.0"
-
-publishMavenStyle := true
-
-developers +=
-  Developer(
-    "sken",
-    "sken",
-    "sken77@pm.me",
-    url("https://www.github.com/sken77")
-  )
-
-organization := "io.lktk"
-
-licenses += ("Apache-2.0", url(
-  "https://www.apache.org/licenses/LICENSE-2.0.txt"
-))
-
-scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/sken77/BLAKE3jni"),
-    "git@github.com:sken77/BLAKE3jni.git"
-  )
-)
 
 libraryDependencies ++= List(
   "com.novocode" % "junit-interface" % "0.11" % "test",
