@@ -22,7 +22,7 @@ testOptions += Tests.Argument(TestFrameworks.JUnit, "-q", "-v")
 
 name := "BLAKE3jni"
 
-version := "0.2.1"
+version := "0.2.2"
 
 libraryDependencies ++= List(
   "com.novocode" % "junit-interface" % "0.11" % "test",
