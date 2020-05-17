@@ -1,3 +1,5 @@
+language: scala
+
 before_install:
   - git fetch --tags
 
@@ -8,9 +10,7 @@ stages:
 
 jobs:
   include:
-    # stage="test" if no stage is specified
     - name: compile
       script: sbt compile
-    # run ci-release only if previous stages passed
     - stage: release
       script: sbt ci-release
