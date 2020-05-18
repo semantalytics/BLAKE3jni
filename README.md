@@ -1,4 +1,5 @@
-[ ![Download](https://api.bintray.com/packages/scala-cash/io/blake3jni/images/download.svg) ](https://bintray.com/scala-cash/io/blake3jni/_latestVersion)
+[![Build Status](https://travis-ci.org/sken77/BLAKE3jni.svg?branch=master)](https://travis-ci.org/sken77/BLAKE3jni)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.lktk/blake3jni/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.lktk/blake3jni)
 
 # JNI Bindings for Blake3
 
@@ -6,13 +7,35 @@ C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) crypt
 
 ## Add to project
 
-Downloading directly from maven repo is pending and this section should be updated soon
+The library works out of the box in windows 64 and linux 64 just add this to your build system
+
+#### Maven (Java)
+
+```xml
+<dependency>
+  <groupId>io.lktk</groupId>
+  <artifactId>blake3jni</artifactId>
+  <version>0.2.2</version>
+</dependency>
+```
+
+#### sbt (Scala)
+
+```sbt
+libraryDependencies += "io.lktk" % "blake3jni" % "0.2.2"
+```
+
+#### Gradle (Kotlin, Groovy)
+
+```groovy
+implementation("io.lktk:blake3jni:0.2.2")
+```
 
 ## Example
 
 ```java
 
-  //Test if the library is properly connected to the c native binaries
+  //Test if the library is properly connected to the c binaries
   assert(NativeBlake3.isEnabled());
    
   // Initialize the hasher
