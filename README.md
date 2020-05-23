@@ -9,7 +9,7 @@ C Bindings for the API of [Blake 3](https://github.com/BLAKE3-team/BLAKE3) crypt
 
 The library works out of the box in windows 64 and linux 64 just add this to your build system
 
-#### Maven (Java)
+#### Maven
 
 ```xml
 <dependency>
@@ -19,13 +19,13 @@ The library works out of the box in windows 64 and linux 64 just add this to you
 </dependency>
 ```
 
-#### sbt (Scala)
+#### sbt
 
 ```sbt
 libraryDependencies += "io.lktk" % "blake3jni" % "0.2.2"
 ```
 
-#### Gradle (Kotlin, Groovy)
+#### Gradle
 
 ```groovy
 implementation("io.lktk:blake3jni:0.2.2")
